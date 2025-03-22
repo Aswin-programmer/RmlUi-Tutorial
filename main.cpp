@@ -263,7 +263,106 @@ private:
     Rml::String root;
 };
 
+class EventListener : public Rml::EventListener {
+public:
+    void ProcessEvent(Rml::Event& event) override {
+        std::cout << "EVENT: " << event.GetType()
+            << " on element: " << event.GetCurrentElement()->GetId()
+            << std::endl;
+
+        if (event.GetType() == "click") {
+            std::cout << "BUTTON CLICKED! ID: "
+                << event.GetCurrentElement()->GetId()
+                << std::endl;
+        }
+    }
+};
+
 // ... (Keep input callback functions the same)
+// ================== INPUT CALLBACK IMPLEMENTATIONS ==================
+void CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
+    Rml::Context* context = (Rml::Context*)glfwGetWindowUserPointer(window);
+    if (context) {
+        // Convert double to float and flip Y-axis if needed
+        context->ProcessMouseMove(static_cast<int>(xpos), static_cast<int>(ypos), 0);
+
+        // Debug print
+        std::cout << "Mouse position: (" << xpos << ", " << ypos << ")\n";
+    }
+}
+
+void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+    Rml::Context* context = (Rml::Context*)glfwGetWindowUserPointer(window);
+    if (context) {
+        // Convert GLFW button to RmlUi button
+        int rml_button = -1;
+        switch (button) {
+        case GLFW_MOUSE_BUTTON_LEFT: rml_button = 0; break;
+        case GLFW_MOUSE_BUTTON_RIGHT: rml_button = 1; break;
+        case GLFW_MOUSE_BUTTON_MIDDLE: rml_button = 2; break;
+        }
+
+        if (rml_button != -1) {
+            if (action == GLFW_PRESS) {
+                context->ProcessMouseButtonDown(rml_button, 0);
+                std::cout << "Mouse button DOWN: " << rml_button << "\n";
+            }
+            else {
+                context->ProcessMouseButtonUp(rml_button, 0);
+                std::cout << "Mouse button UP: " << rml_button << "\n";
+            }
+        }
+    }
+}
+
+void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+    Rml::Context* context = (Rml::Context*)glfwGetWindowUserPointer(window);
+    if (context) {
+        // RmlUi uses negative yoffset for downward scroll
+        context->ProcessMouseWheel(static_cast<float>(-yoffset), 0);
+
+        // Debug print
+        std::cout << "Mouse wheel: " << yoffset << "\n";
+    }
+}
+
+void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    Rml::Context* context = (Rml::Context*)glfwGetWindowUserPointer(window);
+    if (context) {
+        // Convert GLFW key to RmlUi key identifier
+        Rml::Input::KeyIdentifier rml_key = Rml::Input::KI_UNKNOWN;
+
+        // This is a simplified mapping - you should expand this
+        if (key >= GLFW_KEY_A && key <= GLFW_KEY_Z) {
+            rml_key = static_cast<Rml::Input::KeyIdentifier>(Rml::Input::KI_A + (key - GLFW_KEY_A));
+        }
+        else if (key >= GLFW_KEY_0 && key <= GLFW_KEY_9) {
+            rml_key = static_cast<Rml::Input::KeyIdentifier>(Rml::Input::KI_0 + (key - GLFW_KEY_0));
+        }
+        else {
+            switch (key) {
+            case GLFW_KEY_ESCAPE: rml_key = Rml::Input::KI_ESCAPE; break;
+            case GLFW_KEY_ENTER: rml_key = Rml::Input::KI_RETURN; break;
+            case GLFW_KEY_BACKSPACE: rml_key = Rml::Input::KI_BACK; break;
+            case GLFW_KEY_SPACE: rml_key = Rml::Input::KI_SPACE; break;
+            case GLFW_KEY_LEFT: rml_key = Rml::Input::KI_LEFT; break;
+            case GLFW_KEY_RIGHT: rml_key = Rml::Input::KI_RIGHT; break;
+            case GLFW_KEY_UP: rml_key = Rml::Input::KI_UP; break;
+            case GLFW_KEY_DOWN: rml_key = Rml::Input::KI_DOWN; break;
+            }
+        }
+
+        if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+            context->ProcessKeyDown(rml_key, 0);
+            std::cout << "Key DOWN: " << key << " -> RmlKey: " << rml_key << "\n";
+        }
+        else if (action == GLFW_RELEASE) {
+            context->ProcessKeyUp(rml_key, 0);
+            std::cout << "Key UP: " << key << " -> RmlKey: " << rml_key << "\n";
+        }
+    }
+}
+// ================== END OF INPUT CALLBACKS ==================
 
 int main() {
     if (!glfwInit()) return -1;
@@ -340,10 +439,10 @@ int main() {
 
     // ... (Set up input callbacks same as before)
     // Add these input callback registrations right after creating the context in main()
-    /*glfwSetCursorPosCallback(window, CursorPosCallback);
+    glfwSetCursorPosCallback(window, CursorPosCallback);
     glfwSetMouseButtonCallback(window, MouseButtonCallback);
     glfwSetScrollCallback(window, ScrollCallback);
-    glfwSetKeyCallback(window, KeyCallback);*/
+    glfwSetKeyCallback(window, KeyCallback);
     glfwSetCharCallback(window, [](GLFWwindow* window, unsigned int codepoint) {
         Rml::Context* context = (Rml::Context*)glfwGetWindowUserPointer(window);
         if (context) context->ProcessTextInput((char)codepoint);
@@ -354,8 +453,15 @@ int main() {
     Rml::LoadFontFace("assets/LatoLatin-Bold.ttf");
     Rml::LoadFontFace("assets/LatoLatin-Italic.ttf");
 
+    /*if (auto doc = context->LoadDocument("assets/demo.rml")) {
+        doc->Show();
+    }*/
+    EventListener listener;
     if (auto doc = context->LoadDocument("assets/demo.rml")) {
         doc->Show();
+        if (auto btn = doc->GetElementById("btn1")) {
+            btn->AddEventListener(Rml::EventId::Click, &listener);
+        }
     }
 
     while (!glfwWindowShouldClose(window)) {

@@ -7,7 +7,7 @@
 		<div class="container">
 			<h1>Welcome to RmlUi!</h1>
 			<p>This is a simple RmlUi demonstration.</p>
-			<button id="btn1">Click Me</button>
+			<button id="btn1" onclick="handleClick()">Click Me</button>
 			<button id="btn2">Another Button</button>
 		</div>
 	</body>
