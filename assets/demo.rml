@@ -1,0 +1,14 @@
+<rml>
+	<head>
+		<title>RmlUi Demo</title>
+		<link type="text/rcss" href="demo.rcss"/>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Welcome to RmlUi!</h1>
+			<p>This is a simple RmlUi demonstration.</p>
+			<button id="btn1">Click Me</button>
+			<button id="btn2">Another Button</button>
+		</div>
+	</body>
+</rml>
