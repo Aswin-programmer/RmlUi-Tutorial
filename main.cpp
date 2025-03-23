@@ -1,6 +1,8 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 #include <RmlUi/Core.h>
 #include <GL/glew.h>
@@ -169,22 +171,34 @@ public:
     {
         std::cout << "Loading texture: " << source << std::endl;
 
-        // Implement proper texture loading here (using stb_image or similar)
-        // This is a simplified example
+        // Proper texture loading with stb_image
+        int width, height, channels;
+        stbi_set_flip_vertically_on_load(1);
+        unsigned char* data = stbi_load(source.c_str(), &width, &height, &channels, 4);
+
+        if (!data) {
+            std::cerr << "Failed to load texture: " << source << std::endl;
+            return 0;
+        }
+
         GLuint texture_id;
         glGenTextures(1, &texture_id);
         glBindTexture(GL_TEXTURE_2D, texture_id);
 
-        // Dummy texture - white pixel
-        const unsigned char pixels[] = { 255, 255, 255, 255 };
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
+            width, height, 0,
+            GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+        stbi_image_free(data);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
         const auto handle = next_texture_handle++;
         textures[handle] = texture_id;
-        texture_dimensions = { 1, 1 };
+        texture_dimensions = { width, height };
         return handle;
     }
 
@@ -248,9 +262,39 @@ class CustomFileInterface : public Rml::FileInterface {
 public:
     CustomFileInterface(const Rml::String& root) : root(root) {}
 
+    // Modify your CustomFileInterface to print more debug info
     Rml::FileHandle Open(const Rml::String& path) override {
         Rml::String fullPath = root + path;
+        std::cout << "Trying to open file: " << fullPath << std::endl;
+
+        // Check if file exists before opening
+        if (!std::filesystem::exists(fullPath)) {
+            std::cerr << "File does not exist: " << fullPath << std::endl;
+            // Try alternative paths
+            std::vector<Rml::String> alternatives = {
+                root + "assets/" + path,
+                root + "../assets/" + path,
+                path  // Try absolute path
+            };
+
+            for (const auto& alt : alternatives) {
+                std::cout << "Trying alternative path: " << alt << std::endl;
+                if (std::filesystem::exists(alt)) {
+                    fullPath = alt;
+                    std::cout << "Found file at: " << fullPath << std::endl;
+                    break;
+                }
+            }
+        }
+
         FILE* fp = fopen(fullPath.c_str(), "rb");
+        if (!fp) {
+            std::cerr << "Failed to open file: " << fullPath << std::endl;
+        }
+        else {
+            std::cout << "Successfully opened: " << fullPath << std::endl;
+        }
+
         return (Rml::FileHandle)fp;
     }
 
@@ -287,7 +331,7 @@ void CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
         context->ProcessMouseMove(static_cast<int>(xpos), static_cast<int>(ypos), 0);
 
         // Debug print
-        std::cout << "Mouse position: (" << xpos << ", " << ypos << ")\n";
+        //std::cout << "Mouse position: (" << xpos << ", " << ypos << ")\n";
     }
 }
 
@@ -462,7 +506,15 @@ int main() {
         if (auto btn = doc->GetElementById("btn1")) {
             btn->AddEventListener(Rml::EventId::Click, &listener);
         }
+        // Add this after loading your document but before showing it
+        if (auto element = doc->GetElementById("textured-element")) {
+            std::cout << "Found textured-element" << std::endl;
+            // Force a style update
+            element->SetProperty("background-image", "url(\"test_texture.jpg\")");
+            std::cout << "Set background-image property" << std::endl;
+        }
     }
+    
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -481,10 +533,6 @@ int main() {
 
         context->Update();
         context->Render();
-        // After context->Render()
-        glBindVertexArray(0);
-        glUseProgram(0);
-        glDrawArrays(GL_TRIANGLES, 0, 3); // Simple test triangle
 
         glfwSwapBuffers(window);
     }

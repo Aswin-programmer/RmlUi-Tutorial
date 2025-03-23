@@ -6,9 +6,13 @@
 	<body>
 		<div class="container">
 			<h1>Welcome to RmlUi!</h1>
+			<h2>THis is Aswin. Iam now learning!</h2>
 			<p>This is a simple RmlUi demonstration.</p>
 			<button id="btn1" onclick="handleClick()">Click Me</button>
 			<button id="btn2">Another Button</button>
+			<div id="textured-element"></div>
+			<!-- Add this line below the textured-element div -->
+			<img src="test_texture.jpg" style="width: 400px; height: 400px;"/>
 		</div>
 	</body>
 </rml>
