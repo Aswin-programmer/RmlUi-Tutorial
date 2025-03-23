@@ -12,7 +12,7 @@
 			<button id="btn2">Another Button</button>
 			<div id="textured-element"></div>
 			<!-- Add this line below the textured-element div -->
-			<img src="test_texture.jpg" style="width: 400px; height: 400px;"/>
+			<img src="alien_small.tga" style="width: 400px; height: 400px;"/>
 		</div>
 	</body>
 </rml>

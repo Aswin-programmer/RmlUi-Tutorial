@@ -3,8 +3,7 @@
  *
  * For the latest information, see http://github.com/mikke89/RmlUi
  *
- * Copyright (c) 2008-2010 CodePoint Ltd, Shift Technology Ltd
- * Copyright (c) 2019-2023 The RmlUi Team, and contributors
+ * Copyright (c) 2019-2024 The RmlUi Team, and contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,41 +25,48 @@
  *
  */
 
-#include "ShellFileInterface.h"
-#include <stdio.h>
+#ifndef DEMOWINDOW_H
+#define DEMOWINDOW_H
 
-ShellFileInterface::ShellFileInterface(const Rml::String& root) : root(root) {}
+#include <RmlUi/Core/Element.h>
+#include <RmlUi/Core/EventListener.h>
 
-ShellFileInterface::~ShellFileInterface() {}
+struct TweeningParameters {
+	Rml::Tween::Type type = Rml::Tween::Linear;
+	Rml::Tween::Direction direction = Rml::Tween::Out;
+	float duration = 0.5f;
+};
 
-Rml::FileHandle ShellFileInterface::Open(const Rml::String& path)
-{
-	// Attempt to open the file relative to the application's root.
-	FILE* fp = fopen((root + path).c_str(), "rb");
-	if (fp != nullptr)
-		return (Rml::FileHandle)fp;
+class DemoWindow : public Rml::EventListener {
+public:
+	bool Initialize(const Rml::String& title, Rml::Context* context);
+	void Shutdown();
 
-	// Attempt to open the file relative to the current working directory.
-	fp = fopen(path.c_str(), "rb");
-	return (Rml::FileHandle)fp;
-}
+	void Update();
 
-void ShellFileInterface::Close(Rml::FileHandle file)
-{
-	fclose((FILE*)file);
-}
+	void ProcessEvent(Rml::Event& event) override;
 
-size_t ShellFileInterface::Read(void* buffer, size_t size, Rml::FileHandle file)
-{
-	return fread(buffer, 1, size, (FILE*)file);
-}
+	Rml::ElementDocument* GetDocument();
 
-bool ShellFileInterface::Seek(Rml::FileHandle file, long offset, int origin)
-{
-	return fseek((FILE*)file, offset, origin) == 0;
-}
+	void SubmitForm(Rml::String in_submit_message);
+	void SetSandboxStylesheet(const Rml::String& string);
+	void SetSandboxBody(const Rml::String& string);
 
-size_t ShellFileInterface::Tell(Rml::FileHandle file)
-{
-	return ftell((FILE*)file);
-}
+	TweeningParameters GetTweeningParameters() const;
+	void SetTweeningParameters(TweeningParameters tweening_parameters);
+
+private:
+	Rml::ElementDocument* document = nullptr;
+	Rml::ElementDocument* iframe = nullptr;
+	Rml::Element* gauge = nullptr;
+	Rml::Element* progress_horizontal = nullptr;
+	Rml::SharedPtr<Rml::StyleSheetContainer> rml_basic_style_sheet;
+
+	bool submitting = false;
+	double submitting_start_time = 0;
+	Rml::String submit_message;
+
+	TweeningParameters tweening_parameters;
+};
+
+#endif

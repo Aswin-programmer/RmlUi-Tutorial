@@ -26,7 +26,7 @@
  *
  */
 
-#include "../include/PlatformExtensions.h"
+#include "PlatformExtensions.h"
 #include <RmlUi/Core/Log.h>
 #include <RmlUi/Core/Platform.h>
 

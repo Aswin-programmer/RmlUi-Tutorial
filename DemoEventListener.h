@@ -3,8 +3,7 @@
  *
  * For the latest information, see http://github.com/mikke89/RmlUi
  *
- * Copyright (c) 2008-2010 CodePoint Ltd, Shift Technology Ltd
- * Copyright (c) 2019-2023 The RmlUi Team, and contributors
+ * Copyright (c) 2019-2024 The RmlUi Team, and contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,41 +25,37 @@
  *
  */
 
-#include "ShellFileInterface.h"
-#include <stdio.h>
+#ifndef DEMOEVENTLISTENER_H
+#define DEMOEVENTLISTENER_H
 
-ShellFileInterface::ShellFileInterface(const Rml::String& root) : root(root) {}
+#include <RmlUi/Core/Element.h>
+#include <RmlUi/Core/EventListener.h>
+#include <RmlUi/Core/EventListenerInstancer.h>
 
-ShellFileInterface::~ShellFileInterface() {}
+class DemoWindow;
 
-Rml::FileHandle ShellFileInterface::Open(const Rml::String& path)
-{
-	// Attempt to open the file relative to the application's root.
-	FILE* fp = fopen((root + path).c_str(), "rb");
-	if (fp != nullptr)
-		return (Rml::FileHandle)fp;
+class DemoEventListener : public Rml::EventListener {
+public:
+	DemoEventListener(const Rml::String& value, Rml::Element* element, DemoWindow* demo_window);
 
-	// Attempt to open the file relative to the current working directory.
-	fp = fopen(path.c_str(), "rb");
-	return (Rml::FileHandle)fp;
-}
+	void ProcessEvent(Rml::Event& event) override;
 
-void ShellFileInterface::Close(Rml::FileHandle file)
-{
-	fclose((FILE*)file);
-}
+	void OnDetach(Rml::Element* element) override;
 
-size_t ShellFileInterface::Read(void* buffer, size_t size, Rml::FileHandle file)
-{
-	return fread(buffer, 1, size, (FILE*)file);
-}
+private:
+	Rml::String value;
+	Rml::Element* element;
+	DemoWindow* demo_window;
+};
 
-bool ShellFileInterface::Seek(Rml::FileHandle file, long offset, int origin)
-{
-	return fseek((FILE*)file, offset, origin) == 0;
-}
+class DemoEventListenerInstancer : public Rml::EventListenerInstancer {
+public:
+	DemoEventListenerInstancer(DemoWindow* demo_window);
 
-size_t ShellFileInterface::Tell(Rml::FileHandle file)
-{
-	return ftell((FILE*)file);
-}
+	Rml::EventListener* InstanceEventListener(const Rml::String& value, Rml::Element* element) override;
+
+private:
+	DemoWindow* demo_window;
+};
+
+#endif

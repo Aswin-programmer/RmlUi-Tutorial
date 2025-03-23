@@ -76,14 +76,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLM;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\Include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\SHALWAPI\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLM;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\Include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\lib-vc2022;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;freetype.lib;rmlui.lib;rmlui_debugger.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\SHALWAPI\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\lib-vc2022;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;freetype.lib;rmlui.lib;rmlui_debugger.lib;ShLwApi.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,14 +108,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLM;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\Include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\SHALWAPI\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLM;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\Include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\include;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\lib-vc2022;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;freetype.lib;rmlui.lib;rmlui_debugger.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\SHALWAPI\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\RmlUi\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\freetype\lib;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLFW\lib-vc2022;C:\Aswin_Game_DEV\OPENGL_TUTORIAL\RMLUI\RMLUI\MYTRY\RmlUi-Tutorial\EXTERNAL\GLEW\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;freetype.lib;rmlui.lib;rmlui_debugger.lib;ShLwApi.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,7 +135,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ADDITONAL\PlatformExtensions.cpp" />
+    <ClCompile Include="ADDITONAL\RendererExtensions.cpp" />
+    <ClCompile Include="ADDITONAL\RmlUi_Backend_GLFW_GL3.cpp" />
+    <ClCompile Include="ADDITONAL\RmlUi_Platform_GLFW.cpp" />
+    <ClCompile Include="ADDITONAL\RmlUi_Renderer_GL3.cpp" />
+    <ClCompile Include="ADDITONAL\Shell.cpp" />
+    <ClCompile Include="ADDITONAL\ShellFileInterface.cpp" />
+    <ClCompile Include="DemoEventListener.cpp" />
+    <ClCompile Include="DemoWindow.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ADDITONAL\PlatformExtensions.h" />
+    <ClInclude Include="ADDITONAL\RendererExtensions.h" />
+    <ClInclude Include="ADDITONAL\RmlUi_Backend.h" />
+    <ClInclude Include="ADDITONAL\RmlUi_Include_Windows.h" />
+    <ClInclude Include="ADDITONAL\RmlUi_Platform_GLFW.h" />
+    <ClInclude Include="ADDITONAL\RmlUi_Renderer_GL3.h" />
+    <ClInclude Include="ADDITONAL\Shell.h" />
+    <ClInclude Include="ADDITONAL\ShellFileInterface.h" />
+    <ClInclude Include="DemoEventListener.h" />
+    <ClInclude Include="DemoWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
