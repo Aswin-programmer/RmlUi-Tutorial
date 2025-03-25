@@ -1,18 +1,9 @@
 <rml>
 	<head>
-		<title>RmlUi Demo</title>
+		<title>My RmlUi Document</title>
 		<link type="text/rcss" href="demo.rcss"/>
 	</head>
 	<body>
-		<div class="container">
-			<h1>Welcome to RmlUi!</h1>
-			<h2>THis is Aswin. Iam now learning!</h2>
-			<p>This is a simple RmlUi demonstration.</p>
-			<button id="btn1" onclick="handleClick()">Click Me</button>
-			<button id="btn2">Another Button</button>
-			<div id="textured-element"></div>
-			<!-- Add this line below the textured-element div -->
-			<img src="alien_small.tga" style="width: 400px; height: 400px;"/>
-		</div>
+		<p>Hello World!</p>
 	</body>
 </rml>

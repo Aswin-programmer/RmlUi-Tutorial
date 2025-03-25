@@ -1,57 +1,17 @@
 body {
-    width: 100%;
-    height: 100%;
-    font-family: LatoLatin;
-    font-size: 36px;
-    color: red;
-}
-
-h1 {
-    font-size: 44px;
-    color: white;
-    margin: 10px;
-    font-weight: normal;
-}
-
-h2 {
-    font-size: 44px;
-    color: red;
-    margin: 10px;
-    font-weight: normal;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	background-color: transparent;
+	font-family: LatoLatin;
 }
 
 p {
-    margin: 10px;
-    font-size: 34px;
-    line-height: 1.4;
-}
+	color: red;
+	font-size:44px;
+	text-align: center;
+	font-weight: bold;
 
-button {
-    font-size: 34px;
-    display: block;
-    margin: 10px;
-    padding: 5px 10px;
-    background: #446;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.container {
-    padding: 15px;
-}
-
-#textured-element {
-    display: block;
-    width: 256px;
-    height: 256px;
-    margin: 50px auto;
-    background-color: blue;
-    /* RmlUi requires decorator syntax for images */
-    decorator: image(invader.tga);
-    
-    /* For image scaling (if needed) */
-    decorator: tiled-horizontal( 
-        image(alien_small.tga width: 256px height: 256px)
-    );
 }
