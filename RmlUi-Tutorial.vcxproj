@@ -142,8 +142,6 @@
     <ClCompile Include="ADDITONAL\RmlUi_Renderer_GL3.cpp" />
     <ClCompile Include="ADDITONAL\Shell.cpp" />
     <ClCompile Include="ADDITONAL\ShellFileInterface.cpp" />
-    <ClCompile Include="DemoEventListener.cpp" />
-    <ClCompile Include="DemoWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,8 +153,6 @@
     <ClInclude Include="ADDITONAL\RmlUi_Renderer_GL3.h" />
     <ClInclude Include="ADDITONAL\Shell.h" />
     <ClInclude Include="ADDITONAL\ShellFileInterface.h" />
-    <ClInclude Include="DemoEventListener.h" />
-    <ClInclude Include="DemoWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

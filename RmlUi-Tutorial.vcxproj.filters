@@ -39,12 +39,6 @@
     <ClCompile Include="ADDITONAL\RendererExtensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DemoWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DemoEventListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ADDITONAL\ShellFileInterface.h">
@@ -69,12 +63,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ADDITONAL\PlatformExtensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DemoWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DemoEventListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

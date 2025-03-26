@@ -192,6 +192,12 @@ void Backend::PresentFrame()
 	RMLUI_FrameMark;
 }
 
+GLFWwindow* Backend::GetWindow()
+{
+	RMLUI_ASSERT(data);
+	return data->window;
+}
+
 static void SetupCallbacks(GLFWwindow* window)
 {
 	RMLUI_ASSERT(data);

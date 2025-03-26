@@ -2,8 +2,23 @@
 	<head>
 		<title>My RmlUi Document</title>
 		<link type="text/rcss" href="demo.rcss"/>
+		<link type="text/template" href="template_demo.rml"/>
 	</head>
 	<body>
 		<p>Hello World!</p>
+		<div>
+			<template src="basic">
+				Another Paragraph!
+			</template>
+		</div>
+		<h1>Simple data binding example</h1>
+		<div data-model="my_model" class="class1">
+			<h2>{{title}}</h2>
+			<p data-if="show_text">The quick brown fox jumps over the lazy {{animal}}.</p>
+			<input type="text" data-value="animal" data-input="update"/>
+			<P class="class2">Test Successfull. Hot Reloading Enabled and Done Some Succesfull Data Binding!</P>
+		</div>
 	</body>
 </rml>
+
+ 

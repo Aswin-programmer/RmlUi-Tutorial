@@ -1,0 +1,8 @@
+<template name="basic" content="content">
+    <head>
+        <link type="text/rcss" href="template_style.rcss"/>
+    </head>
+    <body class="window">
+        <p id="content"></p>
+    </body>
+</template>

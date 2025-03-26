@@ -29,6 +29,8 @@
 #ifndef RMLUI_BACKENDS_BACKEND_H
 #define RMLUI_BACKENDS_BACKEND_H
 
+#include <GLFW/glfw3.h>
+
 #include <RmlUi/Core/Input.h>
 #include <RmlUi/Core/RenderInterface.h>
 #include <RmlUi/Core/SystemInterface.h>
@@ -66,6 +68,8 @@ void RequestExit();
 void BeginFrame();
 // Presents the rendered frame to the screen, call after rendering the RmlUi context.
 void PresentFrame();
+
+GLFWwindow* GetWindow();  // Add this line
 
 } // namespace Backend
 
